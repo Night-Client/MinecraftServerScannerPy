@@ -14,11 +14,11 @@ def test():
     try:
         print((server.status().version.__str__() + " Exists"))
         res = ip + " - " + server.status().version.__str__() + " -  Exists"
+        file.write(res + "\n")
     except:
         print("Error")
         res = ip + " - None"
-
-    file.write(res + "\n")
+        
     file.close()
 
 # thread thing
