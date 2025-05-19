@@ -25,9 +25,11 @@ def test():
     file.close()
 
 def status():
+    global last_scanned
     global total_scanned
     time.sleep(10)
-    print("Scanned " + str(total_scanned) + " Servers")
+    print("Scanned " + str(total_scanned) + " Servers (" + str((total_scanned - last_scanned)/10) + "/s)")
+    last_scanned = total_scanned
     status()
 
 threading.Thread(target=status).start()
