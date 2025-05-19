@@ -4,11 +4,14 @@ import threading
 import time
 
 MAX_THREADS = 600
+filepath = input("Path to text file to save data in: ")
+last_scanned = 0
+total_scanned = 0
 
 def test():
-    filepath = input("Path to text file to save data in:")
+    global total_scanned
     file = open(filepath, "a+")
-    ip = str(randint(1, 255)) + "." + str(randint(1, 255)) + "." + str(randint(1, 255)) + "." + str(randint(1, 255)) + ":25565"
+    ip = str(92) + "." + str(randint(100, 120)) + "." + str(randint(1, 255)) + "." + str(randint(1, 255)) + ":25565"
     server = JavaServer.lookup(ip)
 
     try:
@@ -16,15 +19,23 @@ def test():
         res = ip + " - " + server.status().version.__str__() + " -  Exists"
         file.write(res + "\n")
     except:
-        print("Error")
-        res = ip + " - None"
-        
+        pass
+
+    total_scanned += 1
     file.close()
+
+def status():
+    global total_scanned
+    time.sleep(10)
+    print("Scanned " + str(total_scanned) + " Servers")
+    status()
+
+threading.Thread(target=status).start()
 
 # thread thing
 
 while True:
-    time.sleep(3)
+    time.sleep(1)
 
     threads = []
     for _ in range(MAX_THREADS):
