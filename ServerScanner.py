@@ -17,7 +17,7 @@ def test():
     server = JavaServer.lookup(ip)
 
     try:
-        res = ip + " - " + server.status().version.__str__()
+        res = ip + " - " + server.status().version.name.__str__()
         file.write(res + "\n")
         found += 1
     except:
