@@ -4,22 +4,23 @@ import threading
 import time
 
 MAX_THREADS = 600
+filepath = input("Path to text file to save data in:")
 
 def test():
-    filepath = input("Path to text file to save data in:")
-    file = open(filepath, "a+")
+    loc_fliepath = filepath
     ip = str(randint(1, 255)) + "." + str(randint(1, 255)) + "." + str(randint(1, 255)) + "." + str(randint(1, 255)) + ":25565"
     server = JavaServer.lookup(ip)
 
     try:
         print((server.status().version.__str__() + " Exists"))
         res = ip + " - " + server.status().version.__str__() + " -  Exists"
-        file.write(res + "\n")
     except:
         print("Error")
         res = ip + " - None"
         
-    file.close()
+    with open(loc_filepath, "a+") as f:
+        f.write(res + "\n")
+        
 
 # thread thing
 
